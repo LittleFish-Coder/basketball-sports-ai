@@ -16,5 +16,6 @@ with argument config:
 - boxes: Show boxes in segmentation predictions
 
 We can get the result as the video below.
-![example](./src/pose_estimation_example2.gif)
+![example2](./src/pose_estimation_example2.gif)
 
+## Player Detection
