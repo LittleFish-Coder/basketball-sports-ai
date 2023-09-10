@@ -18,4 +18,12 @@ with argument config:
 We can get the result as the video below.
 ![example2](./src/pose_estimation_example2.gif)
 
-## Player Detection
+## Player Action Detection
+The data set is provided by National Cheng Kung University Women’s Basketball Team.
+And we use Roboflow platform to label the data set.
+
+The current classes are as follows:
+- Shot
+
+By using the online model from Roboflow, we can get the player action detection result as the video below.
+![shot](./src/object_detection_example.gif)
