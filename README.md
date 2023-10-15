@@ -22,6 +22,9 @@ The current model can detect actions below:
 
 ![shot_detection_example](./src/object_detection_example.gif)
 
+### Apply on real basketball game play
+![gameplay_shot_detection](./src/gameplay_shot_detection.gif)
+
 ## Pose Estimation
 By using pretrained model, we can get the pose estimation result as the video below.
 ![pose_estimation_example](./src/pose_estimation_example.gif)
