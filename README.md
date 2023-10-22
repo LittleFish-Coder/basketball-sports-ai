@@ -20,7 +20,7 @@ By training the model with custom dataset, we build a model to detect player act
 The current model can detect actions below:
 - Shot
 
-![shot_detection_example](./src/object_detection_example.gif)
+![shot_detection](./src/shot_detection.gif)
 
 ### Apply on real basketball game play
 ![gameplay_shot_detection](./src/gameplay_shot_detection.gif)
