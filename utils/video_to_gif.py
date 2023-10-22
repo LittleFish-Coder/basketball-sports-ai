@@ -2,28 +2,28 @@
 # - specify the starting time of the gif
 # - specify the duration of the gif
 # - specify the playback speed of the gif
-
+import argparse
 import ffmpeg
 import os
 
 def convert_video_to_gif(input_video_path, output_gif_path, start_time=0, duration=5, playback_speed=1):
-  """Converts a video to a GIF
+    ffmpeg.input(input_video_path, ss=start_time).filter('setpts', f'{playback_speed}*PTS').output(output_gif_path, format='gif', t=duration).run(overwrite_output=True)
 
-  Args:
-    input_video_path: The path to the input video file.
-    output_gif_path: The path to the output GIF file.
-    start_time: The starting time of the video.
-    duration: The duration of the video.
-    playback_speed: The playback speed. (Normal speed is 1.0)
-  """
-
-  ffmpeg.input(input_video_path, ss=start_time).filter('setpts', f'{playback_speed}*PTS').output(output_gif_path, format='gif', t=duration).run(overwrite_output=True)
-
+  
 if __name__ == '__main__':
-  input_video_path = os.path.join(os.getcwd(), 'runs/detect/predict6/alan.avi')
-  output_gif_path = os.path.join(os.getcwd(), 'src/output.gif')
-  start_time = 0 # seconds
-  duration = 27 # seconds
-  playback_speed = 1 # the lower the value is -> the faster the video is
+    parser = argparse.ArgumentParser(description="Video to GIF Converter")
+    parser.add_argument("--input", default='./src/alan.mp4', help="Input video file path")
+    parser.add_argument("--output", default='./src/alan.gif', help="Output GIF file path")
+    parser.add_argument("--start-time", type=int, default=0, help="Starting time in seconds (default: 0)")
+    parser.add_argument("--duration", type=int, default=5, help="Duration in seconds (default: 5)")
+    parser.add_argument("--playback-speed", type=float, default=1.0, help="Playback speed (default: 1.0)")
 
-  convert_video_to_gif(input_video_path, output_gif_path, start_time, duration, playback_speed)
+    args = parser.parse_args()
+
+    input_video_path = args.input
+    output_gif_path = args.output
+    start_time = args.start_time
+    duration = args.duration
+    playback_speed = args.playback_speed
+
+    convert_video_to_gif(input_video_path, output_gif_path, start_time, duration, playback_speed)
