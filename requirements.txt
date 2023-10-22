@@ -58,6 +58,9 @@ python-dotenv==1.0.0
 pytz==2023.3
 PyYAML==6.0.1
 pyzmq==25.1.1
+PyQt5==5.15.10
+PyQt5-Qt5==5.15.11
+PyQt5-sip==12.13.0
 requests==2.31.0
 requests-toolbelt==1.0.0
 roboflow==1.1.6
