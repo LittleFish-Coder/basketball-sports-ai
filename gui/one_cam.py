@@ -8,7 +8,7 @@ app = QtWidgets.QApplication(sys.argv)
 window_w, window_h = 300, 200    # 定義預設長寬尺寸
 
 Form = QtWidgets.QWidget()
-Form.setWindowTitle('oxxo.studio')
+Form.setWindowTitle('SportsAI')
 Form.resize(window_w, window_h)  # 使用變數
 
 def windowResize(self):
@@ -23,7 +23,7 @@ label = QtWidgets.QLabel(Form)
 label.setGeometry(0,0,window_w,window_h)  # 使用變數
 
 # Load model
-pt = os.path.join(os.getcwd(), 'model_pt/yolov8n-pose.pt')
+pt = os.path.join(os.getcwd(), 'model_pt/yolov8n.pt')
 model = YOLO(pt)
 
 def opencv():
