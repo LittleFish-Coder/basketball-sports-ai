@@ -14,7 +14,7 @@ def get_sources():
     sources = []
     t = time.time()
     while time.time() - t < 1.0 * 3:
-        print("Looking for sources ...")
+        print('Looking for sources ...')
         ndi.find_wait_for_sources(ndi_find, 1000)
         sources = ndi.find_get_current_sources(ndi_find)
     for s in sources:
@@ -23,14 +23,14 @@ def get_sources():
     return sources
 
 
+
 def ip_source(sources, ip):
     for s in sources:
         if str(ip) in s.ndi_name:
             return s
     return None
 
-
-class VideoCapture:
+class VideoCapture():
     def __init__(self, sources):
         ndi_recv_create = ndi.RecvCreateV3()
         ndi_recv_create.color_format = ndi.RECV_COLOR_FORMAT_BGRX_BGRA
@@ -45,7 +45,7 @@ class VideoCapture:
             return True, frame
         else:
             return False, None
-
+#
     def release(self):
         ndi.recv_destroy(self.ndi_recv)
         ndi.destroy()
