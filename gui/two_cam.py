@@ -3,6 +3,7 @@ from PyQt5.QtGui import QImage, QPixmap
 import sys, cv2, threading
 from ultralytics import YOLO
 from PyQt5 import QtCore
+import cvndi
 import os
 
 app = QtWidgets.QApplication(sys.argv)
@@ -10,6 +11,8 @@ app = QtWidgets.QApplication(sys.argv)
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+
+        self.source = cvndi.get_sources()
 
         self.setWindowTitle('SportsAI')
         self.resize(400, 400)  # 设置窗口的大小
@@ -60,10 +63,11 @@ class MainWindow(QtWidgets.QWidget):
         self.shot_thread.start()
 
     def opencv(self):
-        cap = cv2.VideoCapture(0)
-        if not cap.isOpened():
-            print("Cannot open camera")
-            return
+        # cap = cv2.VideoCapture(0)
+        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, '102'))
+        # if not cap.isOpened():
+        #     print("Cannot open camera")
+        #     return
         while True:
             ret, frame = cap.read()
             if not ret:
@@ -91,10 +95,11 @@ class MainWindow(QtWidgets.QWidget):
             # self.right_label.setPixmap(QPixmap.fromImage(shot_img))
 
     def shot_detection(self, sub_window):
-        cap = cv2.VideoCapture(0)
-        if not cap.isOpened():
-            print("Cannot open camera")
-            return
+        # cap = cv2.VideoCapture(0)
+        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, '102'))
+        # if not cap.isOpened():
+        #     print("Cannot open camera")
+        #     return
         while True:
             ret, frame = cap.read()
             if not ret:
