@@ -6,12 +6,6 @@ from PyQt5 import QtCore
 import cvndi
 import os
 
-# def windowResize(self):
-#     global window_w, window_h    # 定義使用全域變數
-#     window_w = self.Form.width()      # 讀取視窗寬度
-#     window_h = self.Form.height()     # 讀取視窗高度
-#     self.label.setGeometry(0,0,window_w,window_h)  # 設定 QLabel 長寬
-
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -44,14 +38,14 @@ class MainWindow(QtWidgets.QWidget):
 
         # In the left sub-window, display webcam's result
         self.left_label = QtWidgets.QLabel()
-        self.left_label.setFixedSize(960, 540)
+        self.left_label.setFixedSize(720, 480)
         # self.left_label.setFixedSize(desired_width, desired_height)
         # self.left_label.setScaledContents(True)  # Scale the image to fit QLabel
         left_layout.addWidget(self.left_label)
 
         # In the right sub-window, add your GUI components
         self.right_label = QtWidgets.QLabel()
-        self.right_label.setFixedSize(960, 540)
+        self.right_label.setFixedSize(720, 480)
         # self.right_label.setScaledContents(True)  # Scale the image to fit QLabel
         right_layout.addWidget(self.right_label)
 
@@ -69,8 +63,8 @@ class MainWindow(QtWidgets.QWidget):
         self.shot_thread.start()
 
     def pose_estimation(self):
-        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
-        # cap = cv2.VideoCapture(1)   # for webcam
+        # cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
+        cap = cv2.VideoCapture(0)  # for webcam
         # if not cap.isOpened():
         #     print("Cannot open camera")
         #     return
@@ -85,9 +79,7 @@ class MainWindow(QtWidgets.QWidget):
             results = self.model_pose(frame)
             frame = results[0].plot(boxes=False)
 
-            frame = cv2.resize(
-                frame, (self.left_label.width(), self.left_label.height())
-            )
+            frame = cv2.resize(frame, (self.left_label.width(), self.left_label.height()))
             height, width, channel = frame.shape
             bytesPerline = channel * width
 
@@ -95,8 +87,8 @@ class MainWindow(QtWidgets.QWidget):
             self.left_label.setPixmap(QPixmap.fromImage(img))
 
     def shot_detection(self):
-        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
-        # cap = cv2.VideoCapture(1)   # for webcam
+        # cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
+        cap = cv2.VideoCapture(0)  # for webcam
         # if not cap.isOpened():
         #     print("Cannot open camera")
         #     return
@@ -111,9 +103,7 @@ class MainWindow(QtWidgets.QWidget):
             results = self.model_shot(frame)
             frame = results[0].plot(conf=False)
 
-            frame = cv2.resize(
-                frame, (self.right_label.width(), self.right_label.height())
-            )
+            frame = cv2.resize(frame, (self.right_label.width(), self.right_label.height()))
             height, width, channel = frame.shape
             bytesPerline = channel * width
 
