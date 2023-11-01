@@ -3,15 +3,15 @@ import os
 import cv2
 
 # Load model
-pt = os.path.join(os.getcwd(), 'model_pt/shot_detection_v2.pt')
+pt = os.path.join(os.getcwd(), "model_pt/shot_detection_v2.pt")
 model = YOLO(pt)
 
 # Inference
-source = os.path.join(os.getcwd(), 'testing-datasets/side.mp4')
-results = model(source, save=True, conf=0.5, show_labels=True, show_conf=True, boxes=True, stream=False)
+source = os.path.join(os.getcwd(), "testing-datasets/alan_stadium.mp4")
+results = model(source, save=True, conf=0.3, show_labels=True, boxes=True, stream=False)
 
 # Open the video file
-video_path = os.path.join(os.getcwd(), 'testing-datasets/side.mp4')
+video_path = os.path.join(os.getcwd(), "testing-datasets/alan_stadium.mp4")
 cap = cv2.VideoCapture(video_path)
 
 # Loop through the video frames
@@ -39,4 +39,3 @@ while cap.isOpened():
 # Release the video capture object and close the display window
 cap.release()
 cv2.destroyAllWindows()
-

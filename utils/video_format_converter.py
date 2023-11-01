@@ -2,8 +2,10 @@
 import argparse
 import ffmpeg
 
+
 def convert_video(input_path, output_path):
     ffmpeg.input(input_path).output(output_path).run()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Video Format Converter")
