@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument("--input", default="./runs/pose/predict2/newjeans.mp4", help="Input video file path")
     parser.add_argument("--output", default="./src/newjeans.gif", help="Output GIF file path")
     parser.add_argument("--start-time", type=int, default=0, help="Starting time in seconds (default: 0)")
-    parser.add_argument("--duration", type=int, default=5, help="Duration in seconds (default: 5)")
+    parser.add_argument("--duration", type=int, default=10, help="Duration in seconds (default: 5)")
     parser.add_argument("--playback-speed", type=float, default=1.0, help="Playback speed (default: 1.0)")
 
     args = parser.parse_args()
