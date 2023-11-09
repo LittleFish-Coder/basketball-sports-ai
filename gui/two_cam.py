@@ -13,9 +13,15 @@ class MainWindow(QtWidgets.QWidget):
 
         self.source = cvndi.get_sources()  # whether to use ndi camera
 
+        # get os screen size
+        screen = QtWidgets.QApplication.desktop().screenGeometry()
+        screen_height = screen.height()
+        screen_width = screen.width()
+        self.resize(screen_width, screen_height)
+
         self.setWindowTitle("SportsAI")
-        self.resize(1920, 1080)
-        self.setGeometry(0, 0, 1920, 1080)  # 设置窗口的位置和大小
+        # self.resize(1920, 1080)
+        # self.setGeometry(0, 0, 1920, 1080)  # 设置窗口的位置和大小
         # screen_height = self.availableGeometry().height()
 
         layout = QtWidgets.QHBoxLayout(self)
@@ -53,7 +59,8 @@ class MainWindow(QtWidgets.QWidget):
         pt = os.path.join(os.getcwd(), "model_pt/yolov8n-pose.pt")
         self.model_pose = YOLO(pt)
 
-        pt = os.path.join(os.getcwd(), "model_pt/yolov8n.pt")
+        # pt = os.path.join(os.getcwd(), "model_pt/yolov8n.pt")
+        pt = os.path.join(os.getcwd(), "model_pt/shot_detection_v2.pt")
         self.model_shot = YOLO(pt)
 
         self.pose_thread = threading.Thread(target=self.pose_estimation)
@@ -63,8 +70,8 @@ class MainWindow(QtWidgets.QWidget):
         self.shot_thread.start()
 
     def pose_estimation(self):
-        # cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
-        cap = cv2.VideoCapture(0)  # for webcam
+        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
+        # cap = cv2.VideoCapture(0)  # for webcam
         # if not cap.isOpened():
         #     print("Cannot open camera")
         #     return
@@ -87,8 +94,8 @@ class MainWindow(QtWidgets.QWidget):
             self.left_label.setPixmap(QPixmap.fromImage(img))
 
     def shot_detection(self):
-        # cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
-        cap = cv2.VideoCapture(0)  # for webcam
+        cap = cvndi.VideoCapture(cvndi.ip_source(self.source, "102"))  # for ndi camera
+        # cap = cv2.VideoCapture(0)  # for webcam
         # if not cap.isOpened():
         #     print("Cannot open camera")
         #     return
@@ -100,7 +107,7 @@ class MainWindow(QtWidgets.QWidget):
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
             # Run YOLOv8 inference on the frame
-            results = self.model_shot(frame)
+            results = self.model_shot(frame, conf=0.35)
             frame = results[0].plot(conf=False)
 
             frame = cv2.resize(frame, (self.right_label.width(), self.right_label.height()))
