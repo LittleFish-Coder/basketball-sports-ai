@@ -11,7 +11,7 @@ def calculate_degree(pt1: tuple, pt2: tuple, pt3: tuple):
     pt3 = np.array(pt3)
 
     # Calculate vectors
-    vec1 = pt2 - pt1
+    vec1 = pt1 - pt2
     vec2 = pt3 - pt2
 
     # Calculate dot product
@@ -27,7 +27,4 @@ def calculate_degree(pt1: tuple, pt2: tuple, pt3: tuple):
     # Convert to degrees
     degrees = np.degrees(angle)
 
-    # Calculate the interior angle
-    interior_angle = 180 - degrees
-
-    return interior_angle.round(2)
+    return degrees.round(2)

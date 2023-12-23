@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from utils import calculate_degree
 
-video_path = os.path.join(os.getcwd(), "testing-datasets/back.mp4")
+video_path = os.path.join(os.getcwd(), "testing-datasets/side.mp4")
 model_path = os.path.join(os.getcwd(), "model_pt/yolov8n-pose.pt")
 
 
