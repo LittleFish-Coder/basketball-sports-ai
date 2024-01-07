@@ -15,7 +15,7 @@ def convert_video_to_gif(input_video_path, output_gif_path, start_time=0, durati
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Video to GIF Converter")
-    parser.add_argument("--input", default="./runs/pose/predict2/newjeans.mp4", help="Input video file path")
+    parser.add_argument("--input", default="./src/newjeans.mp4", help="Input video file path")
     parser.add_argument("--output", default="./src/newjeans.gif", help="Output GIF file path")
     parser.add_argument("--start-time", type=int, default=0, help="Starting time in seconds (default: 0)")
     parser.add_argument("--duration", type=int, default=10, help="Duration in seconds (default: 5)")
